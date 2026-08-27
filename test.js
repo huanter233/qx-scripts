@@ -5,8 +5,11 @@ function getFlag(code) {
     return String.fromCodePoint(...code.toUpperCase().split('').map(c => 127397 + c.charCodeAt()));
 }
 
-// 第一行显示国旗和地区，第二行显示 IP 和运营商
-let title = `${getFlag(obj.countryCode)} ${obj.country || '未知'}`;
-let subtitle = `${obj.query || '无IP'} | ${obj.isp || ''}`;
+let flag = getFlag(obj.countryCode);
 
-$done({ title: title, subtitle: subtitle });
+$done({
+    title: `${flag} ${obj.country || '未知'}`,
+    subtitle: `${obj.query || '无IP'} | ${obj.isp || ''}`,
+    ip: obj.query,
+    isp: obj.isp
+});
