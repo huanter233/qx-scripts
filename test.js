@@ -5,6 +5,8 @@ function getFlag(code) {
     return String.fromCodePoint(...code.toUpperCase().split('').map(c => 127397 + c.charCodeAt()));
 }
 
-// 强制拼接为单行：国旗 地区 | IP
-let text = `${getFlag(obj.countryCode)} ${obj.country} | ${obj.query}`;
-$done({ title: text });
+// title 显示国旗和地区，subtitle 显示具体的 IP 和运营商
+let title = `${getFlag(obj.countryCode)} ${obj.country || 'Unknown'}`;
+let subtitle = `${obj.query || 'No IP'} | ${obj.isp || ''}`;
+
+$done({ title: title, subtitle: subtitle });
